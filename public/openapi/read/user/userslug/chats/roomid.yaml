@@ -107,6 +107,12 @@ get:
                               type: string
                             banned:
                               type: boolean
+                            groupTitle:
+                              type: string
+                              nullable: true
+                            groupTitleArray:
+                              type: array
+                              nullable: true
                             icon:text:
                               type: string
                               description: A single-letter representation of a username. This is used in the
