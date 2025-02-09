@@ -72,4 +72,38 @@ utils.getFontawesomeVersion = function () {
 	return packageJson.version;
 };
 
+utils.censorBannedText = function (content) {
+	const meta = require('./meta');
+
+	let bannedWords = (meta.config.bannedWords || '').trim();
+	bannedWords = bannedWords.split(',');
+	bannedWords = bannedWords.filter(Boolean).map((bannedWord) => {
+		bannedWord = bannedWord.trim();
+		return bannedWord.toLowerCase();
+	});
+
+	const bannedWordsRegex = new RegExp(`\\b(${bannedWords.join('|')})\\b`, 'gi');
+
+	return content.replace(bannedWordsRegex, (match) => {
+		return match[0] + '*'.repeat(match.length - 2) + match.slice(-1); // Transforms "apple" to "a***e"
+	});
+};
+
+utils.censorBannedMarkdown = function (content) {
+	const meta = require('./meta');
+
+	let bannedWords = (meta.config.bannedWords || '').trim();
+	bannedWords = bannedWords.split(',');
+	bannedWords = bannedWords.filter(Boolean).map((bannedWord) => {
+		bannedWord = bannedWord.trim();
+		return bannedWord.toLowerCase();
+	});
+
+	const bannedWordsRegex = new RegExp(`\\b(${bannedWords.join('|')})\\b`, 'gi');
+
+	return content.replace(bannedWordsRegex, (match) => {
+		return match[0] + '\\*'.repeat(match.length - 2) + match.slice(-1); // Transforms "apple" to "a***e"
+	});
+};
+
 module.exports = utils;

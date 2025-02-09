@@ -76,22 +76,4 @@ Meta.getSessionTTLSeconds = function () {
 	return ttl;
 };
 
-Meta.censorBannedText = function (content) {
-	const bannedWords = ["apple", "banana", "orange"]; // Add your banned words here
-	const bannedWordsRegex = new RegExp(`\\b(${bannedWords.join('|')})\\b`, 'gi');
-
-	return content.replace(bannedWordsRegex, (match) => {
-		return match[0] + '*'.repeat(match.length - 2) + match.slice(-1); // Transforms "apple" to "a***e"
-	});
-};
-
-Meta.censorBannedMarkdown = function (content) {
-	const bannedWords = ["apple", "banana", "orange"]; // Add your banned words here
-	const bannedWordsRegex = new RegExp(`\\b(${bannedWords.join('|')})\\b`, 'gi');
-
-	return content.replace(bannedWordsRegex, (match) => {
-		return match[0] + '\\*'.repeat(match.length - 2) + match.slice(-1); // Transforms "apple" to "a***e"
-	});
-};
-
 require('../promisify')(Meta);

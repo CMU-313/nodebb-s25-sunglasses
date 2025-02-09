@@ -96,8 +96,8 @@ module.exports = function (Topics) {
 		data.tags = data.tags || [];
 		data.content = String(data.content || '').trimEnd();
 
-		data.title = meta.censorBannedText(data.title);
-		data.content = meta.censorBannedMarkdown(data.content);
+		data.title = utils.censorBannedText(data.title);
+		data.content = utils.censorBannedMarkdown(data.content);
 
 		if (!isAdmin) {
 			Topics.checkTitle(data.title);
@@ -188,7 +188,7 @@ module.exports = function (Topics) {
 		await guestHandleValid(data);
 		data.content = String(data.content || '').trimEnd();
 
-		data.content = meta.censorBannedMarkdown(data.content);
+		data.content = utils.censorBannedMarkdown(data.content);
 
 		if (!data.fromQueue && !isAdmin) {
 			await user.isReadyToPost(uid, data.cid);
