@@ -59,14 +59,15 @@ module.exports = function (Messaging) {
 		messages = await user.blocks.filter(uid, 'fromuid', messages);
 		const users = await user.getUsersFields(
 			messages.map(msg => msg && msg.fromuid),
-			['uid', 'username', 'userslug', 'picture', 'status', 'banned']
+			['uid', 'username', 'userslug', 'picture', 'status', 'banned', 'groupTitle']
 		);
 
 		messages.forEach((message, index) => {
 			message.fromUser = users[index];
 			message.fromUser.banned = !!message.fromUser.banned;
 			message.fromUser.deleted = message.fromuid !== message.fromUser.uid && message.fromUser.uid === 0;
-
+			message.fromUser.status = message.fromUser.status;
+			message.fromUser.groupTitle = message.fromUser.groupTitle;
 			const self = message.fromuid === parseInt(uid, 10);
 			message.self = self ? 1 : 0;
 
