@@ -118,6 +118,14 @@
 						[[admin/settings/post:restrictions.stale-help]]
 					</p>
 				</div>
+
+				<div class="mb-3">
+					<label class="form-label" for="bannedWords">[[admin/settings/post:restrictions.banned-words]]</label>
+					<input id="bannedWords" type="text" class="form-control" value="" data-field="bannedWords" data-field-type="tagsinput" />
+					<p class="form-text">
+						[[admin/settings/post:restrictions.banned-words-help]]
+					</p>
+				</div>
 			</div>
 
 			<hr/>
