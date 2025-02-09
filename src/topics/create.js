@@ -17,8 +17,6 @@ const translator = require('../translator');
 
 module.exports = function (Topics) {
 	Topics.create = async function (data) {
-
-		console.log('elx topic is creating!!!', data);
 		// This is an internal method, consider using Topics.post instead
 		const timestamp = data.timestamp || Date.now();
 
@@ -89,8 +87,6 @@ module.exports = function (Topics) {
 			privileges.categories.can('topics:tag', data.cid, uid),
 			privileges.users.isAdministrator(uid),
 		]);
-
-		console.log('elx topic is posting!!!', data);
 
 		data.title = String(data.title).trim();
 		data.tags = data.tags || [];

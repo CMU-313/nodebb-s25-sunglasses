@@ -29,7 +29,6 @@ Topics.create = async (req, res) => {
 };
 
 Topics.reply = async (req, res) => {
-	console.log('elx topics reply', req.body);
 	const id = await lockPosting(req, '[[error:already-posting]]');
 	try {
 		const payload = await api.topics.reply(req, { ...req.body, tid: req.params.tid });
@@ -65,7 +64,6 @@ Topics.purge = async (req, res) => {
 };
 
 Topics.pin = async (req, res) => {
-	console.log("topics pin elx", req.body);
 	const { expiry } = req.body;
 	await api.topics.pin(req, { tids: [req.params.tid], expiry });
 

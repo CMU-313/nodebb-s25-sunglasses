@@ -31,7 +31,6 @@ module.exports = function (Messaging) {
 	};
 
 	Messaging.getRoomsData = async (roomIds, fields = []) => {
-		console.log('elx getRoomsData', roomIds, fields);
 		if (fields.includes('notificationSetting') && !fields.includes('public')) {
 			fields.push('public');
 		}

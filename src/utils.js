@@ -82,10 +82,18 @@ utils.censorBannedText = function (content) {
 		return bannedWord.toLowerCase();
 	});
 
+	if (!bannedWords.length) {
+		return content;
+	}
+
 	const bannedWordsRegex = new RegExp(`\\b(${bannedWords.join('|')})\\b`, 'gi');
 
 	return content.replace(bannedWordsRegex, (match) => {
-		return match[0] + '*'.repeat(match.length - 2) + match.slice(-1); // Transforms "apple" to "a***e"
+		if (match.length <= 2) {
+			// Replace single-character words with "*"
+			return '**';
+		}
+		return match[0] + '*'.repeat(match.length - 2) + match.slice(-1);
 	});
 };
 
@@ -99,10 +107,18 @@ utils.censorBannedMarkdown = function (content) {
 		return bannedWord.toLowerCase();
 	});
 
+	if (!bannedWords.length) {
+		return content;
+	}
+
 	const bannedWordsRegex = new RegExp(`\\b(${bannedWords.join('|')})\\b`, 'gi');
 
 	return content.replace(bannedWordsRegex, (match) => {
-		return match[0] + '\\*'.repeat(match.length - 2) + match.slice(-1); // Transforms "apple" to "a***e"
+		if (match.length <= 2) {
+			// Replace single-character words with "*"
+			return '**';
+		}
+		return match[0] + '*'.repeat(match.length - 2) + match.slice(-1);
 	});
 };
 
