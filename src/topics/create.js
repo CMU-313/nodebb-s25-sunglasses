@@ -17,6 +17,8 @@ const translator = require('../translator');
 
 module.exports = function (Topics) {
 	Topics.create = async function (data) {
+
+		console.log('elx topic is creating!!!', data);
 		// This is an internal method, consider using Topics.post instead
 		const timestamp = data.timestamp || Date.now();
 
@@ -88,9 +90,15 @@ module.exports = function (Topics) {
 			privileges.users.isAdministrator(uid),
 		]);
 
+		console.log('elx topic is posting!!!', data);
+
 		data.title = String(data.title).trim();
 		data.tags = data.tags || [];
 		data.content = String(data.content || '').trimEnd();
+
+		data.title = meta.censorBannedText(data.title);
+		data.content = meta.censorBannedMarkdown(data.content);
+
 		if (!isAdmin) {
 			Topics.checkTitle(data.title);
 		}
@@ -179,6 +187,8 @@ module.exports = function (Topics) {
 
 		await guestHandleValid(data);
 		data.content = String(data.content || '').trimEnd();
+
+		data.content = meta.censorBannedMarkdown(data.content);
 
 		if (!data.fromQueue && !isAdmin) {
 			await user.isReadyToPost(uid, data.cid);
