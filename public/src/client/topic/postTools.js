@@ -199,6 +199,21 @@ define('forum/topic/postTools', [
 			}
 		});
 
+		postContainer.on('click', '[component="post/endorse"]', function () {
+			console.log('Endorse button clicked');
+			const btn = $(this);
+			const postEl = btn.parents('[data-pid]');
+			postEl.css({
+				'border-left': '2px solid green',
+				'border-top': '2px solid green',
+				'border-bottom': '2px solid green',
+				'border-right': '2px solid green',
+				'border-radius': '10px',
+				'background-color': '#e6ffe6',
+				'box-shadow': '10px 0 0 -10px green',
+			});
+		});
+
 		function checkDuration(duration, postTimestamp, languageKey) {
 			if (!ajaxify.data.privileges.isAdminOrMod && duration && Date.now() - postTimestamp > duration * 1000) {
 				const numDays = Math.floor(duration / 86400);

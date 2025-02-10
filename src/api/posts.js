@@ -164,6 +164,10 @@ postsAPI.delete = async function (caller, data) {
 	});
 };
 
+postsAPI.endorse = async function (caller, data) {
+	return await apiHelpers.postCommand(caller, 'endorse', 'endorsed', '', data);
+};
+
 postsAPI.restore = async function (caller, data) {
 	await deleteOrRestore(caller, data, {
 		command: 'restore',

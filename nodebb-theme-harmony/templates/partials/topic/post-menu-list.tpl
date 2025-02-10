@@ -89,6 +89,11 @@
 			<i class="fa fa-fw text-secondary fa-link"></i> [[topic:copy-permalink]]
 		</a>
 	</li>
+	<li>
+		<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" role="menuitem" href="#" component="post/endorse">
+			<i class="fa fa-fw text-secondary fa-star"></i> [[topic:endorse-post]]
+		</a>
+	</li>
 
 	{{{ if postSharing.length }}}
 	{{{ if config.loggedIn }}}<li class="dropdown-divider"></li>{{{ end }}}
