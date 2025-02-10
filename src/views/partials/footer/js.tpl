@@ -19,5 +19,6 @@
         $(document).ready(function () {
             app.coldLoad();
         });
+        console.log('this is the footoer');
     }
 </script>
