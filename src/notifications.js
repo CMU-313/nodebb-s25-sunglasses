@@ -85,30 +85,32 @@ Notifications.getMultiple = async function (nids) {
 	const usersData = await User.getUsersFields(userKeys, ['username', 'userslug', 'picture']);
 
 	notifications.forEach((notification, index) => {
-		if (notification) {
-			intFields.forEach((field) => {
-				if (notification.hasOwnProperty(field)) {
-					notification[field] = parseInt(notification[field], 10) || 0;
-				}
-			});
-			if (notification.path && !notification.path.startsWith('http')) {
-				notification.path = nconf.get('relative_path') + notification.path;
-			}
-			notification.datetimeISO = utils.toISOString(notification.datetime);
+		if (!notification) {
+			return;
+		}
 
-			if (notification.bodyLong) {
-				notification.bodyLong = utils.stripHTMLTags(notification.bodyLong, ['img', 'p', 'a']);
+		intFields.forEach((field) => {
+			if (notification.hasOwnProperty(field)) {
+				notification[field] = parseInt(notification[field], 10) || 0;
 			}
+		});
+		if (notification.path && !notification.path.startsWith('http')) {
+			notification.path = nconf.get('relative_path') + notification.path;
+		}
+		notification.datetimeISO = utils.toISOString(notification.datetime);
 
-			notification.user = usersData[index];
-			if (notification.user && notification.from) {
-				notification.image = notification.user.picture || null;
-				if (notification.user.username === '[[global:guest]]') {
-					notification.bodyShort = notification.bodyShort.replace(/([\s\S]*?),[\s\S]*?,([\s\S]*?)/, '$1, [[global:guest]], $2');
-				}
-			} else if (notification.image === 'brand:logo' || !notification.image) {
-				notification.image = meta.config['brand:logo'] || `${nconf.get('relative_path')}/logo.png`;
+		if (notification.bodyLong) {
+			notification.bodyLong = utils.stripHTMLTags(notification.bodyLong, ['img', 'p', 'a']);
+		}
+
+		notification.user = usersData[index];
+		if (notification.user && notification.from) {
+			notification.image = notification.user.picture || null;
+			if (notification.user.username === '[[global:guest]]') {
+				notification.bodyShort = notification.bodyShort.replace(/([\s\S]*?),[\s\S]*?,([\s\S]*?)/, '$1, [[global:guest]], $2');
 			}
+		} else if (notification.image === 'brand:logo' || !notification.image) {
+			notification.image = meta.config['brand:logo'] || `${nconf.get('relative_path')}/logo.png`;
 		}
 	});
 	return notifications;
@@ -412,7 +414,9 @@ Notifications.merge = async function (notifications) {
 		'post-queue',
 	];
 
-	notifications = mergeIds.reduce((notifications, mergeId) => {
+	notifications = mergeIds.reduce(notificationsReducer, notifications);
+
+	function notificationsReducer(notifications, mergeId) {
 		const isolated = notifications.filter(n => n && n.hasOwnProperty('mergeId') && n.mergeId.split('|')[0] === mergeId);
 		if (isolated.length <= 1) {
 			return notifications; // Nothing to merge
@@ -428,7 +432,9 @@ Notifications.merge = async function (notifications) {
 			return cur;
 		}, []);
 
-		differentiators.forEach((differentiator) => {
+		differentiators.forEach(differentiatorsIterator);
+
+		function differentiatorsIterator(differentiator) {
 			function typeFromLength(items) {
 				if (items.length === 2) {
 					return 'dual';
@@ -487,7 +493,6 @@ Notifications.merge = async function (notifications) {
 					} else if (numUsers > 2) {
 						notifications[modifyIndex].bodyShort = `[[${mergeId}-${typeFromLength(usernames)}, ${usernames.slice(0, 2).join(', ')}, ${numUsers - 2}${titleEscaped}]]`;
 					}
-
 					notifications[modifyIndex].path = set[set.length - 1].path;
 				} break;
 
@@ -501,13 +506,12 @@ Notifications.merge = async function (notifications) {
 				if (!notifObj || !notifObj.mergeId) {
 					return true;
 				}
-
 				return !(notifObj.mergeId === (mergeId + (differentiator ? `|${differentiator}` : '')) && idx !== modifyIndex);
 			});
-		});
+		}
 
 		return notifications;
-	}, notifications);
+	}
 
 	const data = await plugins.hooks.fire('filter:notifications.merge', {
 		notifications: notifications,
