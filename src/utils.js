@@ -72,4 +72,54 @@ utils.getFontawesomeVersion = function () {
 	return packageJson.version;
 };
 
+utils.censorBannedText = function (content) {
+	const meta = require('./meta');
+
+	let bannedWords = (meta.config.bannedWords || '').trim();
+	bannedWords = bannedWords.split(',');
+	bannedWords = bannedWords.filter(Boolean).map((bannedWord) => {
+		bannedWord = bannedWord.trim();
+		return bannedWord.toLowerCase();
+	});
+
+	if (!bannedWords.length) {
+		return content;
+	}
+
+	const bannedWordsRegex = new RegExp(`\\b(${bannedWords.join('|')})\\b`, 'gi');
+
+	return content.replace(bannedWordsRegex, (match) => {
+		if (match.length <= 2) {
+			// Replace single-character words with "*"
+			return '**';
+		}
+		return match[0] + '*'.repeat(match.length - 2) + match.slice(-1);
+	});
+};
+
+utils.censorBannedMarkdown = function (content) {
+	const meta = require('./meta');
+
+	let bannedWords = (meta.config.bannedWords || '').trim();
+	bannedWords = bannedWords.split(',');
+	bannedWords = bannedWords.filter(Boolean).map((bannedWord) => {
+		bannedWord = bannedWord.trim();
+		return bannedWord.toLowerCase();
+	});
+
+	if (!bannedWords.length) {
+		return content;
+	}
+
+	const bannedWordsRegex = new RegExp(`\\b(${bannedWords.join('|')})\\b`, 'gi');
+
+	return content.replace(bannedWordsRegex, (match) => {
+		if (match.length <= 2) {
+			// Replace single-character words with "*"
+			return '**';
+		}
+		return match[0] + '*'.repeat(match.length - 2) + match.slice(-1);
+	});
+};
+
 module.exports = utils;
