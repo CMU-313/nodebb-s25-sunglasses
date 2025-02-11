@@ -164,6 +164,23 @@ postsAPI.delete = async function (caller, data) {
 	});
 };
 
+postsAPI.setPostEndorsement = async function (pid, endorsed = true) {
+	if (endorsed) {
+		await db.setObjectField(`post:${pid}`, 'endorsed', endorsed);
+	} else {
+		await db.deleteObjectField(`post:${pid}`, 'endorsed');
+	}
+};
+
+postsAPI.getPostEndorsement = async function (pid) {
+	db.isObjectField(`post:${pid}`, 'endorsed', (err, isField) => {
+		if (err) {
+			console.log(err);
+		}
+		return isField;
+	});
+};
+
 postsAPI.restore = async function (caller, data) {
 	await deleteOrRestore(caller, data, {
 		command: 'restore',

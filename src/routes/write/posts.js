@@ -29,6 +29,10 @@ module.exports = function () {
 	setupApiRoute(router, 'get', '/:pid/voters', [middleware.assert.post], controllers.write.posts.getVoters);
 	setupApiRoute(router, 'get', '/:pid/upvoters', [middleware.assert.post], controllers.write.posts.getUpvoters);
 
+	setupApiRoute(router, 'put', '/:pid/endorse', middlewares, controllers.write.posts.endorse);
+	setupApiRoute(router, 'get', '/:pid/isEndorsed', middlewares, controllers.write.posts.isEndorsed);
+	setupApiRoute(router, 'put', '/:pid/unendorse', middlewares, controllers.write.posts.unendorse);
+
 	setupApiRoute(router, 'put', '/:pid/bookmark', middlewares, controllers.write.posts.bookmark);
 	setupApiRoute(router, 'delete', '/:pid/bookmark', middlewares, controllers.write.posts.unbookmark);
 

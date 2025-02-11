@@ -32,10 +32,17 @@ body.template-topic {
 			}
 
 			[component="post"] {
+				padding-right: 10px;
+
 				&.selected .post-container {
 					background-color: mix($body-bg, $body-color, 90%);
 				}
 				&.deleted .post-container .content { opacity: .65; }
+
+				&.endorsed {
+					background-color: lighten(palegreen, 10%);
+					border-radius: 5px;
+				}
 
 				[component="post/content"] {
 					@include fix-lists();

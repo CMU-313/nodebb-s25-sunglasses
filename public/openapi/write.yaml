@@ -184,6 +184,12 @@ paths:
     $ref: 'write/posts/pid/voters.yaml'
   /posts/{pid}/upvoters:
     $ref: 'write/posts/pid/upvoters.yaml'
+  /posts/{pid}/endorse:
+    $ref: 'write/posts/pid/endorse.yaml'
+  /posts/{pid}/unendorse:
+    $ref: 'write/posts/pid/unendorse.yaml'
+  /posts/{pid}/isEndorsed:
+    $ref: 'write/posts/pid/isEndorsed.yaml'
   /posts/{pid}/bookmark:
     $ref: 'write/posts/pid/bookmark.yaml'
   /posts/{pid}/diffs:

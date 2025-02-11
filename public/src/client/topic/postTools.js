@@ -199,6 +199,26 @@ define('forum/topic/postTools', [
 			}
 		});
 
+		postContainer.on('click', '[component="post/endorse"]', async function () {
+			const btn = $(this);
+			const post = btn.parents('[data-pid]');
+			const pid = post.attr('data-pid');
+
+			if (post.hasClass('endorsed')) {
+				post.removeClass('endorsed');
+				post.find('.instructor-badge').remove();
+
+				await api.put(`/posts/${pid}/unendorse`);
+			} else {
+				post.addClass('endorsed');
+				post.find('.instructor-badge-container').append(
+					'<span class="badge bg-success instructor-badge" style="border-radius: 10px;"><i class="fa fa-check"></i> Instructor Endorsed </span>'
+				);
+
+				await api.put(`/posts/${pid}/endorse`);
+			}
+		});
+
 		function checkDuration(duration, postTimestamp, languageKey) {
 			if (!ajaxify.data.privileges.isAdminOrMod && duration && Date.now() - postTimestamp > duration * 1000) {
 				const numDays = Math.floor(duration / 86400);
