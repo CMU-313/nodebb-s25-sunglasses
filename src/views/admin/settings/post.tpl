@@ -1,7 +1,6 @@
 <div class="acp-page-container">
 	<!-- IMPORT admin/partials/settings/header.tpl -->
 
-	<h> Hello You are an admin </h>
 
 	<div class="row settings m-0">
 		<div id="spy-container" class="col-12 col-md-8 px-0 mb-4" tabindex="0">
@@ -136,7 +135,6 @@
 						[[admin/settings/post:restrictions.post-queue-help]]
 					</p>
 				</div>
-				<h> YOU are an admin </h>
 
 				<div class="mb-3">
 					<label class="form-label" for="postQueueReputationThreshold">[[admin/settings/post:restrictions.post-queue-rep-threshold]]</label>
