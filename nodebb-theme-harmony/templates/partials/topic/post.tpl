@@ -14,27 +14,7 @@
 		</a>
 	</div>
 	{{{ if privileges.isAdminOrMod }}}
-	<style>
-        .star {
-            width: 60px;
-            height: 60px;
-            background-color: gold;
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 10px;
-            color: black;
-            text-transform: uppercase;
-            text-align: right;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-        }
-    </style>
-	<body>
-		<div class="star">Admin</div>
-		</body>
+		<div class="admin-star">Admin</div>
 	{{{end}}}
 	<div class="post-container d-flex flex-grow-1 flex-column w-100" style="min-width:0;">
 		<div class="d-flex align-items-center gap-1 flex-wrap w-100 post-header mt-1" itemprop="author" itemscope itemtype="https://schema.org/Person">
