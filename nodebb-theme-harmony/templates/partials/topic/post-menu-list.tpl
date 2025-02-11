@@ -1,4 +1,9 @@
 {{{ if posts.display_moderator_tools }}}
+	<li>
+		<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" role="menuitem" href="#" component="post/endorse">
+			<i class="fa fa-fw text-secondary fa-star"></i> [[topic:endorse-post]]
+		</a>
+	</li>
 <li>
 	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/edit" role="menuitem" href="#">
 		<span class="menu-icon"><i class="fa fa-fw text-secondary fa-pencil"></i></span> [[topic:edit]]
@@ -87,11 +92,6 @@
 	<li>
 		<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" role="menuitem" href="#" data-clipboard-text="{posts.absolute_url}">
 			<i class="fa fa-fw text-secondary fa-link"></i> [[topic:copy-permalink]]
-		</a>
-	</li>
-	<li>
-		<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" role="menuitem" href="#" component="post/endorse">
-			<i class="fa fa-fw text-secondary fa-star"></i> [[topic:endorse-post]]
 		</a>
 	</li>
 

@@ -199,19 +199,24 @@ define('forum/topic/postTools', [
 			}
 		});
 
-		postContainer.on('click', '[component="post/endorse"]', function () {
-			console.log('Endorse button clicked');
+		postContainer.on('click', '[component="post/endorse"]', async function () {
 			const btn = $(this);
-			const postEl = btn.parents('[data-pid]');
-			postEl.css({
-				'border-left': '2px solid green',
-				'border-top': '2px solid green',
-				'border-bottom': '2px solid green',
-				'border-right': '2px solid green',
-				'border-radius': '10px',
-				'background-color': '#e6ffe6',
-				'box-shadow': '10px 0 0 -10px green',
-			});
+			const post = btn.parents('[data-pid]');
+			const pid = post.attr('data-pid');
+
+			if (post.hasClass('endorsed')) {
+				post.removeClass('endorsed');
+				post.find('.instructor-badge').remove();
+
+				await api.put(`/posts/${pid}/unendorse`);
+			} else {
+				post.addClass('endorsed');
+				post.find('.instructor-badge-container').append(
+					'<span class="badge bg-success instructor-badge" style="border-radius: 10px;"><i class="fa fa-check"></i> Instructor Endorsed </span>'
+				);
+
+				await api.put(`/posts/${pid}/endorse`);
+			}
 		});
 
 		function checkDuration(duration, postTimestamp, languageKey) {

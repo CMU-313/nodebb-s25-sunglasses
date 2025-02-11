@@ -7,11 +7,7 @@
 {{{ end }}}
 <div class="d-flex align-items-start gap-3">
 	<div class="bg-body d-none d-sm-block rounded-circle" style="outline: 2px solid var(--bs-body-bg);">
-		{{{ if posts.endorsed }}}
-		<div class="d-flex align-items-start gap-3" style="background-color: lightgreen; border: 2px solid green; border-radius: 10px;">
-		{{{ else }}}
 		<div class="d-flex align-items-start gap-3">
-		{{{ end }}}
 			<div class="bg-body d-none d-sm-block rounded-circle" style="outline: 2px solid var(--bs-body-bg);">
 				<a class="d-inline-block position-relative text-decoration-none" href="{{{ if ./user.userslug }}}{config.relative_path}/user/{./user.userslug}{{{ else }}}#{{{ end }}}" aria-label="[[aria:user-avatar-for, {./user.username}]]">
 					{buildAvatar(posts.user, "48px", true, "", "user/picture")}
@@ -64,6 +60,13 @@
 			</div>
 			{{{ end }}}
 			<div class="d-flex align-items-center gap-1 flex-grow-1 justify-content-end">
+				<span class="instructor-badge-container">
+				{{{ if posts.endorsed }}}
+					<span class="badge bg-success instructor-badge" style="border-radius: 10px;">
+						<i class="fa fa-check"></i> Instructor Endorsed
+					</span>
+				{{{end}}}
+				</span>
 				<span class="bookmarked opacity-0 text-primary"><i class="fa fa-bookmark-o"></i></span>
 				<a href="{config.relative_path}/post/{./pid}" class="post-index text-muted d-none d-md-inline">#{increment(./index, "1")}</a>
 			</div>

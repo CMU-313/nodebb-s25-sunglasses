@@ -127,8 +127,20 @@ Posts.vote = async (req, res) => {
 
 Posts.endorse = async (req, res) => {
 	const data = await mock(req);
-	await api.posts.endorse(req, data);
+	await api.posts.setPostEndorsement(data.pid, true);
 	helpers.formatApiResponse(200, res);
+};
+
+Posts.unendorse = async (req, res) => {
+	const data = await mock(req);
+	await api.posts.setPostEndorsement(data.pid, false);
+	helpers.formatApiResponse(200, res);
+};
+
+Posts.isEndorsed = async (req, res) => {
+	const data = await mock(req);
+	const content = await api.posts.getPostEndorsement(data.pid);
+	res.status(200).json({ endorsed: content });
 };
 
 Posts.unvote = async (req, res) => {
