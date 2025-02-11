@@ -1,5 +1,4 @@
 <!-- IMPORT partials/account/header.tpl -->
-
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
 	<h3 class="fw-semibold fs-5 mb-0">[[global:posts]]</h3>
 	<div class="d-flex flex-wrap gap-1">

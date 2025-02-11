@@ -4,6 +4,7 @@
 <script defer type="text/javascript" src="{scripts.src}"></script>
 {{{end}}}
 
+<h> Test for footer </h>
 <script>
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', prepareFooter);
@@ -18,7 +19,7 @@
 
         $(document).ready(function () {
             app.coldLoad();
-        });
-        console.log('this is the footoer');
+        })
+
     }
 </script>

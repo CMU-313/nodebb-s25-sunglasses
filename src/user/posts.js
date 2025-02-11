@@ -93,7 +93,9 @@ module.exports = function (User) {
 			User.setUserField(postData.uid, 'lastposttime', lastposttime),
 			User.updateLastOnlineTime(postData.uid),
 		]);
+		console.log('jzou was here');
 	};
+
 
 	User.addPostIdToUser = async function (postData) {
 		await db.sortedSetsAdd([
