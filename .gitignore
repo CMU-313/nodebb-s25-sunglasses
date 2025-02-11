@@ -12,6 +12,7 @@ public/css/*.css
 *.sublime-workspace
 .project
 *.swp
+dump.rdb
 Vagrantfile
 .vagrant
 provision.sh
