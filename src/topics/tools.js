@@ -194,6 +194,7 @@ module.exports = function (Topics) {
 
 		topicData.isPinned = pin; // deprecate in v2.0
 		topicData.pinned = pin;
+
 		topicData.events = results[1];
 
 		plugins.hooks.fire('action:topic.pin', { topic: _.clone(topicData), uid });

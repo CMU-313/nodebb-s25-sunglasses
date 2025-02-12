@@ -19,7 +19,6 @@
 			</div>
 		</div>
 	</div>
-
 	<!-- manage menu -->
 	{{{ if showManageMenu }}}
 	<div class="d-flex flex-column">
@@ -31,6 +30,7 @@
 		<div id="collapseManage" class="accordion-collapse collapse" data-bs-parent="#accordionACP">
 			<div class="accordion-body p-0">
 				{{{ if user.privileges.admin:categories }}}
+				<a class="btn-ghost-sm justify-content-start text-decoration-none" id="manage-categories"> Wassuo </a>
 				<a class="btn-ghost-sm justify-content-start text-decoration-none" id="manage-categories" href="{relative_path}/admin/manage/categories">[[admin/menu:manage/categories]]</a>
 				{{{ end }}}
 				{{{ if user.privileges.admin:privileges }}}

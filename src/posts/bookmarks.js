@@ -23,7 +23,6 @@ module.exports = function (Posts) {
 			Posts.getPostFields(pid, ['pid', 'uid']),
 			Posts.hasBookmarked(pid, uid),
 		]);
-
 		if (isBookmarking && hasBookmarked) {
 			throw new Error('[[error:already-bookmarked]]');
 		}

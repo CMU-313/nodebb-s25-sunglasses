@@ -1,6 +1,5 @@
 'use strict';
 
-
 const nconf = require('nconf');
 const validator = require('validator');
 const qs = require('querystring');
@@ -24,12 +23,27 @@ const validSorts = [
 	'recently_replied', 'recently_created', 'most_posts', 'most_votes', 'most_views',
 ];
 
+
+function checkCategories(categoryFields, currentPage, userSettings) {
+	return (!categoryFields.slug || (categoryFields && categoryFields.disabled) ||
+	(userSettings.usePagination && currentPage < 1));
+}
+
+function checkRes(res, req, categoryFields, cid) {
+	return !res.locals.isAPI && !req.params.slug && (categoryFields.slug && categoryFields.slug !== `${cid}/`);
+}
+
+function check3(req, utils, cid) {
+	return (req.params.topic_index && !utils.isNumber(req.params.topic_index)) || !utils.isNumber(cid);
+}
+
 categoryController.get = async function (req, res, next) {
+	console.log('Justin Zou');
 	const cid = req.params.category_id;
 
 	let currentPage = parseInt(req.query.page, 10) || 1;
 	let topicIndex = utils.isNumber(req.params.topic_index) ? parseInt(req.params.topic_index, 10) - 1 : 0;
-	if ((req.params.topic_index && !utils.isNumber(req.params.topic_index)) || !utils.isNumber(cid)) {
+	if (check3(req, utils, cid)) {
 		return next();
 	}
 
@@ -41,9 +55,7 @@ categoryController.get = async function (req, res, next) {
 		user.auth.getFeedToken(req.uid),
 	]);
 
-	if (!categoryFields.slug ||
-		(categoryFields && categoryFields.disabled) ||
-		(userSettings.usePagination && currentPage < 1)) {
+	if (checkCategories(categoryFields, currentPage, userSettings)) {
 		return next();
 	}
 	if (topicIndex < 0) {
@@ -54,7 +66,7 @@ categoryController.get = async function (req, res, next) {
 		return helpers.notAllowed(req, res);
 	}
 
-	if (!res.locals.isAPI && !req.params.slug && (categoryFields.slug && categoryFields.slug !== `${cid}/`)) {
+	if (checkRes(res, req, categoryFields, cid)) {
 		return helpers.redirect(res, `/category/${categoryFields.slug}?${qs.stringify(req.query)}`, true);
 	}
 

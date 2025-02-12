@@ -11,11 +11,28 @@
 				<i class="fa fa-fw fa-inbox text-secondary"></i> [[topic:thread-tools.markAsUnreadForAll]]
 			</a>
 		</li>
+
+		<li>
+			<a component="topic/mark-unread-for-all" href="#" class="dropdown-item rounded-1 d-flex align-items-center gap-2" role="menuitem">
+				<i class="fa fa-fw fa-inbox text-secondary"></i> [[topic:thread-tools.markAsUnreadForAll]]
+			</a>
+		</li>
+
+
+
 		<li>
 			<a component="topic/pin" href="#" class="dropdown-item rounded-1 d-flex align-items-center gap-2" role="menuitem">
 				<i class="fa fa-fw fa-thumb-tack text-secondary"></i> [[topic:thread-tools.pin]]
 			</a>
 		</li>
+
+		<li>
+			<a component="topic/pin" href="#" class="dropdown-item rounded-1 d-flex align-items-center gap-2" role="menuitem">
+				<i class="fa fa-fw fa-thumb-tack text-secondary"></i> [[topic:thread-tools.pin]]
+			</a>
+		</li>
+
+
 		<li>
 			<a component="topic/unpin" href="#" class="hidden dropdown-item rounded-1" role="menuitem">
 				<i class="fa fa-fw fa-thumb-tack fa-rotate-90 text-secondary"></i> [[topic:thread-tools.unpin]]
@@ -78,6 +95,11 @@
 		</li>
 
 		{{{each thread_tools}}}
+		<li>
+			<a href="#" class="dropdown-item rounded-1 d-flex align-items-center gap-2 {thread_tools.class}" role="menuitem">
+				<i class="fa fa-fw {thread_tools.icon} text-secondary"></i>
+				{thread_tools.title}</a>
+		</li>
 		<li>
 			<a href="#" class="dropdown-item rounded-1 d-flex align-items-center gap-2 {thread_tools.class}" role="menuitem">
 				<i class="fa fa-fw {thread_tools.icon} text-secondary"></i>
