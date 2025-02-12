@@ -59,7 +59,7 @@ module.exports = function (Messaging) {
 		messages = await user.blocks.filter(uid, 'fromuid', messages);
 		const users = await user.getUsersFields(
 			messages.map(msg => msg && msg.fromuid),
-			['uid', 'username', 'userslug', 'picture', 'status', 'banned']
+			['uid', 'username', 'userslug', 'picture', 'status', 'banned', 'groupTitle']
 		);
 
 		messages.forEach((message, index) => {
