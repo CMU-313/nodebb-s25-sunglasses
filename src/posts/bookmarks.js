@@ -5,12 +5,10 @@ const plugins = require('../plugins');
 
 module.exports = function (Posts) {
 	Posts.bookmark = async function (pid, uid) {
-		console.log("Hello");
 		return await toggleBookmark('bookmark', pid, uid);
 	};
 
 	Posts.unbookmark = async function (pid, uid) {
-		console.log("Hello");
 		return await toggleBookmark('unbookmark', pid, uid);
 	};
 
@@ -25,7 +23,6 @@ module.exports = function (Posts) {
 			Posts.getPostFields(pid, ['pid', 'uid']),
 			Posts.hasBookmarked(pid, uid),
 		]);
-		console.log("Hello");
 		if (isBookmarking && hasBookmarked) {
 			throw new Error('[[error:already-bookmarked]]');
 		}

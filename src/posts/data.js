@@ -61,7 +61,6 @@ function modifyPost(post, fields) {
 		if (post.hasOwnProperty('upvotes') && post.hasOwnProperty('downvotes')) {
 			post.votes = post.upvotes - post.downvotes;
 		}
-		console.log("hello");
 		if (post.hasOwnProperty('timestamp')) {
 			post.timestampISO = utils.toISOString(post.timestamp);
 		}
