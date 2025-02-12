@@ -63,6 +63,15 @@ define('quickreply', [
 				handle: undefined,
 				content: replyMsg,
 			};
+
+
+			// 1. Get the checkbox element from the DOM
+			const anonymousCheckbox = document.querySelector('#qr-anonymous-checkbox');
+			if (anonymousCheckbox && anonymousCheckbox.checked) {
+				// 2. If it’s checked, add an 'anonymous' flag
+				replyData.anonymous = true;
+			}
+
 			const replyLen = replyMsg.length;
 			if (replyLen < parseInt(config.minimumPostLength, 10)) {
 				return alerts.error('[[error:content-too-short, ' + config.minimumPostLength + ']]');

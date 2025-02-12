@@ -16,6 +16,7 @@ module.exports = function (Posts) {
 		// This is an internal method, consider using Topics.reply instead
 		const { uid } = data;
 		const { tid } = data;
+		const anonymous = data.anonymous || false;
 		const content = data.content.toString();
 		const timestamp = data.timestamp || Date.now();
 		const isMain = data.isMain || false;
@@ -33,6 +34,7 @@ module.exports = function (Posts) {
 			pid: pid,
 			uid: uid,
 			tid: tid,
+			isAnonymous: anonymous,
 			content: content,
 			timestamp: timestamp,
 		};

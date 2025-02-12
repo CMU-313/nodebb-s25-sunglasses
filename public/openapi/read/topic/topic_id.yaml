@@ -59,6 +59,9 @@ get:
                         tid:
                           type: number
                           description: A topic identifier
+                        isAnonymous:
+                          type: boolean
+                          descripton: Whether the post was made anonymously
                         content:
                           type: string
                         timestamp:

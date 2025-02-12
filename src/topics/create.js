@@ -238,6 +238,7 @@ module.exports = function (Topics) {
 		]);
 
 		postData.user = userInfo[0];
+		
 		postData.topic = topicInfo;
 		postData.index = topicInfo.postcount - 1;
 
