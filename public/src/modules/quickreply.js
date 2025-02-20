@@ -58,19 +58,13 @@ define('quickreply', [
 			}
 
 			const replyMsg = components.get('topic/quickreply/text').val();
+			const anonymousCheckbox = components.get('topic/quickreply/anonymous').get(0).checked;
 			const replyData = {
 				tid: ajaxify.data.tid,
 				handle: undefined,
 				content: replyMsg,
+				anonymous: anonymousCheckbox
 			};
-
-
-			// 1. Get the checkbox element from the DOM
-			const anonymousCheckbox = document.querySelector('#qr-anonymous-checkbox');
-			if (anonymousCheckbox && anonymousCheckbox.checked) {
-				// 2. If it’s checked, add an 'anonymous' flag
-				replyData.anonymous = true;
-			}
 
 			const replyLen = replyMsg.length;
 			if (replyLen < parseInt(config.minimumPostLength, 10)) {

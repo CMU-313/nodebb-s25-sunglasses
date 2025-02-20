@@ -32,7 +32,7 @@ get:
                   tid:
                     type: number
                     description: A topic identifier
-                  isAnonymous:
+                  anonymous:
                     type: boolean
                     descripton: Whether the post was made anonymously
                   content:
