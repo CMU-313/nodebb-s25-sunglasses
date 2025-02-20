@@ -63,7 +63,7 @@ define('quickreply', [
 				tid: ajaxify.data.tid,
 				handle: undefined,
 				content: replyMsg,
-				anonymous: anonymousCheckbox
+				anonymous: anonymousCheckbox,
 			};
 
 			const replyLen = replyMsg.length;
