@@ -116,9 +116,9 @@ utils.censorBannedMarkdown = function (content) {
 	return content.replace(bannedWordsRegex, (match) => {
 		if (match.length <= 2) {
 			// Replace single-character words with "*"
-			return '**';
+			return '\\*\\*';
 		}
-		return match[0] + '*'.repeat(match.length - 2) + match.slice(-1);
+		return match[0] + '\\*'.repeat(match.length - 2) + match.slice(-1);
 	});
 };
 

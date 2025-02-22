@@ -102,7 +102,7 @@ describe('Topic\'s', () => {
 				content: 'apple banana grape',
 				cid: topic.categoryId,
 			}, (_, result) => {
-				assert.strictEqual(result.postData.content, 'a***e b****a grape');
+				assert.strictEqual(result.postData.content, 'a\\*\\*\\*e b\\*\\*\\*\\*a grape');
 				meta.config.bannedWords = oldValue;
 				done();
 			});
@@ -133,7 +133,7 @@ describe('Topic\'s', () => {
 				content: 'op grape',
 				cid: topic.categoryId,
 			}, (_, result) => {
-				assert.strictEqual(result.postData.content, '** grape');
+				assert.strictEqual(result.postData.content, '\\*\\* grape');
 				meta.config.bannedWords = oldValue;
 				done();
 			});
