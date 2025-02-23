@@ -59,19 +59,24 @@ module.exports = function (Messaging) {
 		messages = await user.blocks.filter(uid, 'fromuid', messages);
 		const users = await user.getUsersFields(
 			messages.map(msg => msg && msg.fromuid),
-			['uid', 'username', 'userslug', 'picture', 'status', 'banned', 'groupTitle']
+			['uid', 'username', 'userslug', 'picture', 'status', 'banned', 'groupTitle', 'groupTitleArray']
 		);
 
 		messages.forEach((message, index) => {
-			message.fromUser = users[index];
-			message.fromUser.banned = !!message.fromUser.banned;
-			message.fromUser.deleted = message.fromuid !== message.fromUser.uid && message.fromUser.uid === 0;
+				message.fromUser = users[index];
+				message.fromUser.banned = !!message.fromUser.banned;
+				message.fromUser.deleted = message.fromuid !== message.fromUser.uid && message.fromUser.uid === 0;
+				
+				if (message.fromUser.groupTitleArray && message.fromUser.groupTitleArray.length > 0) {
+						let rawTitle = message.fromUser.groupTitleArray[0];
+						let cleanTitle = rawTitle.replace(/"/g, '');
+						message.fromUser.groupTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+				}
 
-			const self = message.fromuid === parseInt(uid, 10);
-			message.self = self ? 1 : 0;
-
-			message.newSet = false;
-			message.roomId = String(message.roomId || roomId);
+				const self = message.fromuid === parseInt(uid, 10);
+				message.self = self ? 1 : 0;
+				message.newSet = false;
+				message.roomId = String(message.roomId || roomId);
 		});
 
 		await parseMessages(messages, uid, roomId, isNew);
