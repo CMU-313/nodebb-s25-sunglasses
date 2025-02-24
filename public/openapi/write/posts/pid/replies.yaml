@@ -41,6 +41,8 @@ get:
                           type: string
                         timestamp:
                           type: number
+                        english:
+                          type: boolean
                         votes:
                           type: number
                         deleted:

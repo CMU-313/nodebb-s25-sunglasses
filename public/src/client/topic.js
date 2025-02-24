@@ -69,6 +69,7 @@ define('forum/topic', [
 		setupQuickReply();
 		handleBookmark(tid);
 		handleThumbs();
+		showTranslatedPost();
 
 		$(window).on('scroll', utils.debounce(updateTopicTitle, 250));
 
@@ -434,6 +435,19 @@ define('forum/topic', [
 		}
 	}
 
+	function showTranslatedPost() {
+		console.log('calling showTranslatedPost');
+		// When the translate button is clicked, toggle the translated version and change the translate button
+		$('.topic').on('click', '.show-translated-btn', function () {
+			$(this).closest('.non-english-message').next('.translated-version').toggle();
+			var visible = $(this).closest('.non-english-message').next('.translated-version').is(':visible');
+			if (visible) {
+				$(this).text('Hide translation.');
+			} else {
+				$(this).text('Translate this message.');
+			}
+		});
+	}
 
 	return Topic;
 });

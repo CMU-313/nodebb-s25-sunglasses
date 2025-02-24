@@ -10,16 +10,17 @@ const topics = require('../topics');
 const categories = require('../categories');
 const groups = require('../groups');
 const privileges = require('../privileges');
+const translationApi = require('../translate');
 
 module.exports = function (Posts) {
 	Posts.create = async function (data) {
 		// This is an internal method, consider using Topics.reply instead
-		console.log('hello everyone');
 		const { uid } = data;
 		const { tid } = data;
 		const content = data.content.toString();
 		const timestamp = data.timestamp || Date.now();
 		const isMain = data.isMain || false;
+		const [english, translatedTxt] = await translationApi.translate(data);		
 
 		if (!uid && parseInt(uid, 10) !== 0) {
 			throw new Error('[[error:invalid-uid]]');
@@ -34,6 +35,8 @@ module.exports = function (Posts) {
 			pid: pid,
 			uid: uid,
 			tid: tid,
+			english: english,
+			translation: translatedTxt,
 			content: content,
 			timestamp: timestamp,
 		};

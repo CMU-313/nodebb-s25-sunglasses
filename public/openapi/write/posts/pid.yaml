@@ -34,6 +34,8 @@ get:
                     description: A topic identifier
                   content:
                     type: string
+                  english:
+                    type: boolean
                   timestamp:
                     type: number
                   flagId:
@@ -64,6 +66,12 @@ get:
                     type: boolean
                   downvoted:
                     type: boolean
+                additionalProperties:
+                  type: object
+                  properties:
+                    translation:
+                      nullable: true
+                      type: string
 put:
   tags:
     - posts
