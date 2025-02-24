@@ -67,10 +67,11 @@ module.exports = function (Messaging) {
 			message.fromUser.banned = !!message.fromUser.banned;
 			message.fromUser.deleted = message.fromuid !== message.fromUser.uid && message.fromUser.uid === 0;
 			message.groupTitle = '';
-			if (message.fromUser.groupTitle && message.fromUser.groupTitle.length > 0 && message.fromUser.groupTitleArray[0] !== undefined) {
-				let rawTitles = message.fromUser.groupTitleArray.slice(0, 3);
-				let cleanTitles = rawTitles.map(title => {
-					let formattedTitle = title.replace(/"/g, '');
+			if (message.fromUser.groupTitle && message.fromUser.groupTitle.length > 0 &&
+					message.fromUser.groupTitleArray[0] !== undefined) {
+				const rawTitles = message.fromUser.groupTitleArray.slice(0, 3);
+				const cleanTitles = rawTitles.map((title) => {
+					const formattedTitle = title.replace(/"/g, '');
 					return formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1);
 				});
 				message.groupTitle = cleanTitles.join(', ');
