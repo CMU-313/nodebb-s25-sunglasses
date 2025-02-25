@@ -4,6 +4,9 @@ TokenObject:
     uid:
       type: number
       description: A valid user id
+    adminrole:
+      type: string
+      description: This checks whether the poster is an admin or not
     description:
       type: string
       description: Optional descriptor to differentiate tokens.
