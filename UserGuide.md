@@ -9,6 +9,13 @@
 4. Post the post
 5. Display name of the poster should be "Anonymous" instead of their username
 
+### Screenshots
+Indicate anonymous checkbox
+![image](https://github.com/user-attachments/assets/f8a48aab-8494-4c8a-8769-9e3558d54c0d)
+
+Reply is anonymous
+![image](https://github.com/user-attachments/assets/ea93e48b-66ba-425f-ba2e-33bce61117ef)
+
 ### Testing
 2 automated tests in `test\topics.js`.
 - Posts an unanonymous reply, retrieves the post, and verifies that it is unanonymous.
@@ -29,6 +36,17 @@ These tests are sufficient for seeing if the backend correctly stores the data. 
 8. Create a new topic with the banned words
 9. Post the topic
 10. Banned words should be starred out (e.g. "a\*\*\*e", "s\*\*\*\*\*\*\*\*y")
+
+### Screenshots
+Admin sets banned words in settings
+![image](https://github.com/user-attachments/assets/c3db57dc-979b-458d-b1ba-c8c4b4026b94)
+
+User wants to post something with banned words
+![image](https://github.com/user-attachments/assets/8f4735b1-1aee-4ccd-b522-fc77e476969a)
+
+Resulting post
+![image](https://github.com/user-attachments/assets/d6181ede-5e53-4dc7-ad58-666976e47e15)
+
 
 ### Testing
 Added automated tests in `test/topics.js` to test `censorBannedText` and `censorBannedMarkdown`.
