@@ -180,7 +180,7 @@ module.exports = function (Topics) {
 		await guestHandleValid(data);
 		data.content = String(data.content || '').trimEnd();
 
-		data.anonymous = data.anonymous || false;
+		data.anonymous = data.anonymous ? 1 : 0;
 
 		if (!data.fromQueue && !isAdmin) {
 			await user.isReadyToPost(uid, data.cid);

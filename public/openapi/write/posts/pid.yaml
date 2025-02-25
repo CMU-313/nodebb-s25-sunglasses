@@ -33,8 +33,7 @@ get:
                     type: number
                     description: A topic identifier
                   anonymous:
-                    type: boolean
-                    descripton: Whether the post was made anonymously
+                    type: number
                   content:
                     type: string
                   timestamp:
