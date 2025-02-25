@@ -140,9 +140,11 @@ module.exports = function (Topics) {
 				postObj.replies = replies[i];
 				postObj.selfPost = parseInt(uid, 10) > 0 && parseInt(uid, 10) === postObj.uid;
 				const isAdmin = user.isAdministrator(postObj.user);
-				postObj.user.adminrole = 'User';
 				if (isAdmin){
-					postObj.user.adminrole = 'Admin';
+					postObj.user.adminrole = true;
+				}
+				else{
+					postObj.user.adminrole =  false;
 				}
 				// Username override for guests, if enabled
 				if (meta.config.allowGuestHandles && postObj.uid === 0 && postObj.handle) {

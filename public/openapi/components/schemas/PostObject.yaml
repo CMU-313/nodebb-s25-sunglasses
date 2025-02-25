@@ -37,9 +37,6 @@ PostObject:
         displayname:
           type: string
           description: This is either username or fullname depending on forum and user settings
-        adminrole:
-          type: string
-          description: This checks whether the poster is an admin or not
         userslug:
           type: string
           description: An URL-safe variant of the username (i.e. lower-cased, spaces
