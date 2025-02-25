@@ -16,7 +16,6 @@ module.exports = function (Categories) {
 		const tids = await Categories.getTopicIds(results);
 		let topicsData = await topics.getTopicsByTids(tids, data.uid);
 		topicsData = await user.blocks.filter(data.uid, topicsData);
-
 		if (!topicsData.length) {
 			return { topics: [], uid: data.uid };
 		}

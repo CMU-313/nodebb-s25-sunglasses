@@ -77,6 +77,68 @@ describe('Topic\'s', () => {
 			});
 		});
 
+		it('should censor banned words in title, >2 letter words', (done) => {
+			const oldVal = meta.config.bannedWords;
+			meta.config.bannedWords = 'apple,banana';
+			topics.post({
+				uid: topic.userId,
+				title: 'apple banana grape',
+				content: topic.content,
+				cid: topic.categoryId,
+			}, (_, result) => {
+				assert.strictEqual(result.topicData.title, 'a***e b****a grape');
+				meta.config.bannedWords = oldVal;
+				done();
+			});
+		});
+
+
+		it('should censor banned words in content, >2 letter words', (done) => {
+			const oldValue = meta.config.bannedWords;
+			meta.config.bannedWords = 'apple,banana';
+			topics.post({
+				uid: topic.userId,
+				title: topic.title,
+				content: 'apple banana grape',
+				cid: topic.categoryId,
+			}, (_, result) => {
+				assert.strictEqual(result.postData.content, 'a***e b****a grape');
+				meta.config.bannedWords = oldValue;
+				done();
+			});
+		});
+
+		it('should censor banned words in title, <=2 letter words', (done) => {
+			const oldValue = meta.config.bannedWords;
+			meta.config.bannedWords = 'op';
+			topics.post({
+				uid: topic.userId,
+				title: 'op grape',
+				content: topic.content,
+				cid: topic.categoryId,
+			}, (_, result) => {
+				assert.strictEqual(result.topicData.title, '** grape');
+				meta.config.bannedWords = oldValue;
+				done();
+			});
+		});
+
+
+		it('should censor banned words in content, <=2 letter words', (done) => {
+			const oldValue = meta.config.bannedWords;
+			meta.config.bannedWords = 'op';
+			topics.post({
+				uid: topic.userId,
+				title: topic.title,
+				content: 'op grape',
+				cid: topic.categoryId,
+			}, (_, result) => {
+				assert.strictEqual(result.postData.content, '** grape');
+				meta.config.bannedWords = oldValue;
+				done();
+			});
+		});
+
 		it('should get post count', async () => {
 			const count = await socketTopics.postcount({ uid: adminUid }, topic.tid);
 			assert.strictEqual(count, 1);
