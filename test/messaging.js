@@ -374,11 +374,22 @@ describe('Messaging Library', () => {
 			assert.equal(raw, 'first chat message');
 		});
 
-		it('should include user groupTitle in chat message', async () => {
+		it('should include user group title in chat message if user has a group title', async () => {
 			const { body } = await callv3API('post', `/chats/${roomId}`, { roomId: roomId, message: 'first chat message' }, 'foo');
 			const messageData = body.response;
+			assert(messageData);
 			assert(messageData.groupTitle, 'Administrators');
 		});
+
+		it('should not include user groupTitle in chat message if use does not have a group title', async () => {
+			await Groups.leave(['administrators'], mocks.users.foo.uid);
+			const { body } = await callv3API('post', `/chats/${roomId}`, { roomId: roomId, message: 'first chat message' }, 'foo');
+			const messageData = body.response;
+			assert(messageData);
+			assert.strictEqual(messageData.groupTitle, '');
+			await Groups.join('administrators', mocks.users.foo.uid);
+		});
+
 
 		it('should fail to send second message due to rate limit', async () => {
 			const oldValue = meta.config.chatMessageDelay;
