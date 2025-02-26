@@ -58,6 +58,7 @@ module.exports = function (Posts) {
 function modifyPost(post, fields) {
 	if (post) {
 		db.parseIntFields(post, intFields, fields);
+		post.english = post.english === 'true' || post.english === undefined;
 		if (post.hasOwnProperty('upvotes') && post.hasOwnProperty('downvotes')) {
 			post.votes = post.upvotes - post.downvotes;
 		}

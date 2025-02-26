@@ -77,6 +77,8 @@ get:
                                               type: number
                                             content:
                                               type: string
+                                            english:
+                                              type: boolean
                                             timestampISO:
                                               type: string
                                               description: An ISO 8601 formatted date string (complementing `timestamp`)
@@ -142,6 +144,10 @@ get:
                                     type: number
                                   timestamp:
                                     type: number
+                                  english:
+                                    type: boolean
+                                  translation:
+                                    type: string
                                   content:
                                     type: string
                                   timestampISO:
