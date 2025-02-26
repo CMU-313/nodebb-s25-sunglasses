@@ -374,6 +374,12 @@ describe('Messaging Library', () => {
 			assert.equal(raw, 'first chat message');
 		});
 
+		it('should include user groupTitle in chat message', async () => {
+			const { body } = await callv3API('post', `/chats/${roomId}`, { roomId: roomId, message: 'first chat message' }, 'foo');
+			const messageData = body.response;
+			assert(messageData.groupTitle, 'Administrators');
+		});
+
 		it('should fail to send second message due to rate limit', async () => {
 			const oldValue = meta.config.chatMessageDelay;
 			meta.config.chatMessageDelay = 1000;
