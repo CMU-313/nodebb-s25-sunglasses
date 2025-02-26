@@ -84,6 +84,9 @@ get:
                           type: number
                         messageId:
                           type: number
+                        groupTitle:
+                          type: string
+                          nullable: true
                         fromUser:
                           type: object
                           properties:
