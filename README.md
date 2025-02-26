@@ -1,4 +1,5 @@
-Team Sunglasses:
+Team Sunglasses: 
+
 Members: Aryan Jain, Eric Due, Emily Xie, Kayo Kuri, Justin Zou
 
 
