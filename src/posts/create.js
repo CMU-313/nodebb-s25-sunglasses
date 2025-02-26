@@ -18,6 +18,7 @@ module.exports = function (Posts) {
 		const { uid } = data;
 		const { tid } = data;
 		const content = data.content.toString();
+		const anonymous = data.anonymous ? 1 : 0;
 		const timestamp = data.timestamp || Date.now();
 		const isMain = data.isMain || false;
 
@@ -34,6 +35,7 @@ module.exports = function (Posts) {
 			pid: pid,
 			uid: uid,
 			tid: tid,
+			anonymous: anonymous,
 			content: content,
 			timestamp: timestamp,
 		};

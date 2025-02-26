@@ -5,7 +5,7 @@ const plugins = require('../plugins');
 const utils = require('../utils');
 
 const intFields = [
-	'uid', 'pid', 'tid', 'deleted', 'timestamp',
+	'uid', 'pid', 'tid', 'anonymous', 'deleted', 'timestamp',
 	'upvotes', 'downvotes', 'deleterUid', 'edited',
 	'replies', 'bookmarks',
 ];
