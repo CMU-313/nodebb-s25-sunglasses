@@ -86,22 +86,28 @@ body.template-topic {
 	}
 	
 	.admin-star {
-        width: 60px;
-        height: 60px;
-        background-color: gold;
-        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 10px;
-        color: black;
-        text-transform: uppercase;
-        text-align: right;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        border-radius: 5px;
-        top: 10px;
-        left: 10px;
+		width: 16px; // Tiny but visible
+		height: 16px;
+		background: linear-gradient(145deg, #3a8dde, #1e5aa6); // Modern blue gradient
+		clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
+						   50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		font-size: 6px;
+		text-align: center;
+		font-weight: bold;
+		text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.8);
+		box-shadow: 0px 2px 5px rgba(0, 0, 255, 0.3), inset 0px -2px 3px rgba(0, 0, 0, 0.2);
+		border-radius: 3px;
+		position: relative;
+		transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	  
+		&:hover {
+		  transform: scale(1.1);
+		  box-shadow: 0px 3px 8px rgba(0, 0, 255, 0.5);
+		}
     }
 
 	[component="post/replies/container"] {

@@ -87,6 +87,8 @@ get:
                         user:
                           type: object
                           properties:
+                            adminrole:
+                              type: boolean
                             uid:
                               type: number
                               description: A user identifier
