@@ -175,13 +175,8 @@ postsAPI.setPostEndorsement = async function (pid, endorsed = true) {
 postsAPI.getPostEndorsement = async function (pid) {
 	return new Promise((resolve, reject) => {
 		db.isObjectField(`post:${pid}`, 'endorsed', (err, isField) => {
-			if (err) {
-				console.log(err);
-				reject(err);
-			} else {
-				// Convert to boolean explicitly
-				resolve(!!isField);
-			}
+			if (err) reject(err);
+			else resolve(!!isField);
 		});
 	});
 };
