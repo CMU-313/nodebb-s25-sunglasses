@@ -1,4 +1,3 @@
- 
 'use strict';
 
 const _ = require('lodash');
@@ -108,7 +107,6 @@ module.exports = function (Topics) {
 			return [];
 		}
 		const pids = postData.map(post => post && post.pid);
-		
 		let outsideUids = null;
 		async function getPostUserData(field, method) {
 			const uids = _.uniq(postData.filter(p => p && parseInt(p[field], 10) >= 0).map(p => p[field]));
@@ -126,7 +124,7 @@ module.exports = function (Topics) {
 			posts.hasBookmarked(pids, uid),
 			posts.getVoteStatusByPostIDs(pids, uid),
 			getPostUserData('uid', async uids => await posts.getUserInfoForPosts(uids, uid)),
-			getPostUserData('editor', async uids => await user.getUsersFields(uids, ['uid', 'username', 'userslug','isAdmin'])),
+			getPostUserData('editor', async uids => await user.getUsersFields(uids, ['uid', 'username', 'userslug', 'isAdmin'])),
 			getPostReplies(postData, uid),
 			Topics.addParentPosts(postData),
 		]);
@@ -141,7 +139,7 @@ module.exports = function (Topics) {
 				postObj.votes = postObj.votes || 0;
 				postObj.replies = replies[i];
 				postObj.selfPost = parseInt(uid, 10) > 0 && parseInt(uid, 10) === postObj.uid;
-				outsideUids.forEach(i => {
+				outsideUids.forEach((i) => {
 					userData[String(i)].adminrole = userData[String(i)].groupTitle !== null;
 				});
 				if (meta.config.allowGuestHandles && postObj.uid === 0 && postObj.handle) {

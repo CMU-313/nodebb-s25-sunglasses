@@ -22,18 +22,15 @@ module.exports = function (Categories) {
 				const isAdmin = await user.isAdministrator(topic.uid);
 				if (isAdmin) {
 					return 'Admin';
-				} else{
-					return 'user';
 				}
+				return 'user';
 			})
 		);
-		
 		topicsData.forEach((topic, index) => {
-			if (adminRole[index] == 'Admin'){
-				topic.adminrole = 'Admin'
-			}
-			else{
-				topic.adminrole = 'User'
+			if (adminRole[index] === 'Admin') {
+				topic.adminrole = 'Admin';
+			} else {
+				topic.adminrole = 'User';
 			}
 		});
 		if (!topicsData.length) {

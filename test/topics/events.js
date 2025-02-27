@@ -93,7 +93,7 @@ describe('Topic Events', () => {
 			const isAdmin = await user.isAdministrator(topicData.user.uid);
 			if (isAdmin) {
 				role = 'Admin';
-			} 
+			}
 			assert.strictEqual(topicData.user.role, role);
 		});
 	});
