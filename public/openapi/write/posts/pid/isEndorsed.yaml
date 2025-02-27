@@ -18,5 +18,8 @@ get:
         application/json:
           schema:
             type: object
-            properties: {}
+            properties:
+              endorsed:
+                type: boolean
+                description: Indicates whether the post is endorsed or not
 
