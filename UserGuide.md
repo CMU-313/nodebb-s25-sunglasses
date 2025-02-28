@@ -53,3 +53,41 @@ Added automated tests in `test/topics.js` to test `censorBannedText` and `censor
 These tests set a list of banned words, post a post with the banned word both in title and in content, and verify the result contains the starred out words.
 These tests verify the accuracy of the functions and the censoring for both plaintext and markdown.
 `npm run lint` and `npm run test` are working.
+
+
+## Topic Tags
+
+### Instructions
+1. Create an account as a normal user
+2. Create a topic and enter the topic discussion
+3. You should see a User tag next to your post
+4. Create an admin account
+5. Create a topic and enter the topic discussion
+6. You should see a User tag next to your post
+
+### Screenshots
+User Tag
+![image](https://github.com/user-attachments/assets/3f3c869c-7b60-4ba0-b7e7-ee66165a5900)
+
+### Testing
+1 automated tests in `test\event.js`.
+- Checks the role of the user is what is being stored
+`npm run lint` and `npm run test` are working.
+
+
+## Admin Star
+
+### Instructions
+1. Create an account as a admin user
+2. Create a topic and enter the topic discussion
+3. You should see a blue star next to your name
+
+### Screenshots
+User Tag
+![image](https://github.com/user-attachments/assets/77530c9d-850c-458c-ac49-f50a5ce1fceb)
+
+### Testing
+1 automated tests in `test\event.js`.
+- Checks the role of the user is what is being stored and if it is admin give it a star
+`npm run lint` and `npm run test` are working.
+
