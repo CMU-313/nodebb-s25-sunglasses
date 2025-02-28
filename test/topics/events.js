@@ -84,6 +84,20 @@ describe('Topic Events', () => {
 		});
 	});
 
+	describe('.checkAdmin()', () => {
+		it('this should make sure that the topic gets a proper tag', async () => {
+			const topicData = await topics.getTopic(topic.topicData.tid);
+			assert(topicData);
+			assert(topicData.user);
+			let role = 'user';
+			const isAdmin = await user.isAdministrator(topicData.user.uid);
+			if (isAdmin) {
+				role = 'Admin';
+			}
+			assert.strictEqual(topicData.user.role, role);
+		});
+	});
+
 	describe('.purge()', () => {
 		let eventIds;
 

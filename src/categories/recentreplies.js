@@ -172,7 +172,7 @@ module.exports = function (Categories) {
 		]);
 
 		await batch.processArray(pids, async (pids) => {
-			const postData = await posts.getPostsFields(pids, ['pid', 'deleted', 'uid', 'timestamp', 'upvotes', 'downvotes']);
+			const postData = await posts.getPostsFields(pids, ['pid', 'anonymous', 'deleted', 'uid', 'timestamp', 'upvotes', 'downvotes']);
 
 			const bulkRemove = [];
 			const bulkAdd = [];
