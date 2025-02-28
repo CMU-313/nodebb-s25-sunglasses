@@ -94,7 +94,7 @@ describe('Topic Events', () => {
 			if (isAdmin) {
 				role = 'Admin';
 			}
-			assert.strictEqual(topicData.user.role, role);
+			assert.strictEqual(topicData.user.adminrole, role);
 		});
 	});
 
