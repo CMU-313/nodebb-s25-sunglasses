@@ -116,4 +116,28 @@ Added automated tests in `test/messaging.js`:
 - Sends a message from a user with no group title and verifies that `groupTitle` is empty.  
 - Sends a message from a user in the "Administrators" group and verifies that `groupTitle` is "Administrators".  
 These tests confirm that the correct group title is displayed in the chat interface.  
+`npm run lint` and `npm run test` are working.
+
+
+
+## Translate Posts
+
+### Instructions
+1. Create an account (doesn't matter what kind).
+2. Post a chat in a separate language.
+3. Click the "translate this message" button under the post (only shows up if the message isn't in English).
+4. Translation will show up under the button
+5. Click the "Undo translation" button to hide the translation.
+
+### Screenshots
+![Screenshot 2025-02-27 at 8 24 59 PM](https://github.com/user-attachments/assets/3070eec9-a165-4f3d-9839-bbe6ca8466e8)
+![Screenshot 2025-02-27 at 8 25 10 PM](https://github.com/user-attachments/assets/ddf4c804-91c4-4c9d-9dd1-d47c1da83724)
+![Screenshot 2025-02-27 at 8 25 17 PM](https://github.com/user-attachments/assets/e28ca371-5342-4cb6-bc14-702a1c716ec9)
+
+
+
+### Testing
+One atuomated test:  
+- Posts a message in English with typos.  
+This test confirms that the translation will show only if the API detects a different language.  
 `npm run lint` and `npm run test` are working.  
