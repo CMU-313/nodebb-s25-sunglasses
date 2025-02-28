@@ -63,20 +63,24 @@ module.exports = function (Messaging) {
 		);
 
 		messages.forEach((message, index) => {
-				message.fromUser = users[index];
-				message.fromUser.banned = !!message.fromUser.banned;
-				message.fromUser.deleted = message.fromuid !== message.fromUser.uid && message.fromUser.uid === 0;
-				
-				if (message.fromUser.groupTitleArray && message.fromUser.groupTitleArray.length > 0) {
-						let rawTitle = message.fromUser.groupTitleArray[0];
-						let cleanTitle = rawTitle.replace(/"/g, '');
-						message.fromUser.groupTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
-				}
+			message.fromUser = users[index];
+			message.fromUser.banned = !!message.fromUser.banned;
+			message.fromUser.deleted = message.fromuid !== message.fromUser.uid && message.fromUser.uid === 0;
+			message.groupTitle = '';
+			if (message.fromUser.groupTitle && message.fromUser.groupTitle.length > 0 &&
+					message.fromUser.groupTitleArray[0] !== undefined) {
+				const rawTitles = message.fromUser.groupTitleArray.slice(0, 3);
+				const cleanTitles = rawTitles.map((title) => {
+					const formattedTitle = title.replace(/"/g, '');
+					return formattedTitle.charAt(0).toUpperCase() + formattedTitle.slice(1);
+				});
+				message.groupTitle = cleanTitles.join(', ');
+			}
 
-				const self = message.fromuid === parseInt(uid, 10);
-				message.self = self ? 1 : 0;
-				message.newSet = false;
-				message.roomId = String(message.roomId || roomId);
+			const self = message.fromuid === parseInt(uid, 10);
+			message.self = self ? 1 : 0;
+			message.newSet = false;
+			message.roomId = String(message.roomId || roomId);
 		});
 
 		await parseMessages(messages, uid, roomId, isNew);
