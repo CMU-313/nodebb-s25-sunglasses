@@ -91,3 +91,29 @@ User Tag
 - Checks the role of the user is what is being stored and if it is admin give it a star
 `npm run lint` and `npm run test` are working.
 
+---
+
+## Group Title in Chat Messages
+
+### Instructions
+1. Create two users: one with no assigned user group and another with an assigned group (e.g., "Administrators").
+2. Start a chat conversation between the two users.
+3. The first user (without a group) should send a message.
+4. The second user (with a group) should send a message.
+5. In the chat message display, the first user should have no group title shown, while the second user should have "Administrators" displayed.
+
+### Screenshots
+User with no group title vs User with group title
+![chat with groups and no groups](https://github.com/user-attachments/assets/e42e63b1-2cfc-4b75-afaa-1410e90d0f8f)
+
+
+User can change their group title  
+![chat with groups changed](https://github.com/user-attachments/assets/d43c86b4-fafa-4e08-aad2-71f45228ea3d)
+
+
+### Testing
+Added automated tests in `test/messaging.js`:  
+- Sends a message from a user with no group title and verifies that `groupTitle` is empty.  
+- Sends a message from a user in the "Administrators" group and verifies that `groupTitle` is "Administrators".  
+These tests confirm that the correct group title is displayed in the chat interface.  
+`npm run lint` and `npm run test` are working.  
