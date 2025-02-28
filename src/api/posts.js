@@ -173,11 +173,11 @@ postsAPI.setPostEndorsement = async function (pid, endorsed = true) {
 };
 
 postsAPI.getPostEndorsement = async function (pid) {
-	db.isObjectField(`post:${pid}`, 'endorsed', (err, isField) => {
-		if (err) {
-			console.log(err);
-		}
-		return isField;
+	return new Promise((resolve, reject) => {
+		db.isObjectField(`post:${pid}`, 'endorsed', (err, isField) => {
+			if (err) reject(err);
+			else resolve(!!isField);
+		});
 	});
 };
 
@@ -411,13 +411,13 @@ async function canSeeVotes(uid, cids, type) {
 	const cidToAllowed = _.zipObject(uniqCids, canRead);
 	const checks = cids.map(
 		(cid, index) => isAdmin || isMod[index] ||
-		(
-			cidToAllowed[cid] &&
 			(
-				meta.config[type] === 'all' ||
-				(meta.config[type] === 'loggedin' && parseInt(uid, 10) > 0)
+				cidToAllowed[cid] &&
+				(
+					meta.config[type] === 'all' ||
+					(meta.config[type] === 'loggedin' && parseInt(uid, 10) > 0)
+				)
 			)
-		)
 	);
 	return isArray ? checks : checks[0];
 }

@@ -460,6 +460,19 @@ describe('Topic\'s', () => {
 			toPid = await posts.getPostField(reply2.pid, 'toPid');
 			assert.strictEqual(toPid, null);
 		});
+
+		it('should allow endorsing and unendorsing a reply', async () => {
+			const result = await topics.post({ uid: fooUid, title: 'nested test', content: 'main post', cid: topic.categoryId });
+			const reply1 = await topics.reply({ uid: fooUid, content: 'reply post 1', tid: result.topicData.tid });
+
+			await apiPosts.setPostEndorsement(reply1.pid, true);
+			const endorsed = await apiPosts.getPostEndorsement(reply1.pid);
+			assert(endorsed);
+
+			await apiPosts.setPostEndorsement(reply1.pid, false);
+			const unendorsed = await apiPosts.getPostEndorsement(reply1.pid);
+			assert(!unendorsed);
+		});
 	});
 
 	describe('Get methods', () => {
