@@ -18,6 +18,7 @@ module.exports = function (Posts) {
 		const { uid } = data;
 		const { tid } = data;
 		const content = data.content.toString();
+		const anonymous = data.anonymous ? 1 : 0;
 		const timestamp = data.timestamp || Date.now();
 		const isMain = data.isMain || false;
 		const [english, translatedTxt] = await translationApi.translate(data);
@@ -37,6 +38,7 @@ module.exports = function (Posts) {
 			tid: tid,
 			english: english,
 			translation: translatedTxt,
+			anonymous: anonymous,
 			content: content,
 			timestamp: timestamp,
 		};

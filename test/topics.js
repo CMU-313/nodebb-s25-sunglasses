@@ -102,7 +102,7 @@ describe('Topic\'s', () => {
 				content: 'apple banana grape',
 				cid: topic.categoryId,
 			}, (_, result) => {
-				assert.strictEqual(result.postData.content, 'a***e b****a grape');
+				assert.strictEqual(result.postData.content, 'a\\*\\*\\*e b\\*\\*\\*\\*a grape');
 				meta.config.bannedWords = oldValue;
 				done();
 			});
@@ -133,7 +133,7 @@ describe('Topic\'s', () => {
 				content: 'op grape',
 				cid: topic.categoryId,
 			}, (_, result) => {
-				assert.strictEqual(result.postData.content, '** grape');
+				assert.strictEqual(result.postData.content, '\\*\\* grape');
 				meta.config.bannedWords = oldValue;
 				done();
 			});
@@ -341,6 +341,30 @@ describe('Topic\'s', () => {
 			assert.equal(postData[0].pid, result.pid, 'result should be the reply we added');
 		});
 
+		it('should create not anonymous replies', async () => {
+			const result = await topics.reply({ uid: topic.userId, content: 'test not anonymous reply', tid: newTopic.tid, toPid: newPost.pid, anonymous: false });
+			assert.ok(result);
+
+			const postData = await apiPosts.getReplies({ uid: 0 }, { pid: newPost.pid });
+			assert.ok(postData);
+
+			const anonymousReply = postData.find(reply => reply.pid === result.pid);
+			assert.ok(anonymousReply, 'the not anonymous reply should be present');
+			assert.equal(anonymousReply.anonymous, 0, 'should not be anonymous');
+		});
+
+		it('should create anonymous replies', async () => {
+			const result = await topics.reply({ uid: topic.userId, content: 'test anonymous reply', tid: newTopic.tid, toPid: newPost.pid, anonymous: true });
+			assert.ok(result);
+
+			const postData = await apiPosts.getReplies({ uid: 0 }, { pid: newPost.pid });
+			assert.ok(postData);
+
+			const anonymousReply = postData.find(reply => reply.pid === result.pid);
+			assert.ok(anonymousReply, 'the anonymous reply should be present');
+			assert.equal(anonymousReply.anonymous, 1, 'should be anonymous');
+		});
+
 		it('should error if pid is not a number', async () => {
 			await assert.rejects(
 				apiPosts.getReplies({ uid: 0 }, { pid: 'abc' }),
@@ -435,6 +459,19 @@ describe('Topic\'s', () => {
 			assert.strictEqual(replies, null);
 			toPid = await posts.getPostField(reply2.pid, 'toPid');
 			assert.strictEqual(toPid, null);
+		});
+
+		it('should allow endorsing and unendorsing a reply', async () => {
+			const result = await topics.post({ uid: fooUid, title: 'nested test', content: 'main post', cid: topic.categoryId });
+			const reply1 = await topics.reply({ uid: fooUid, content: 'reply post 1', tid: result.topicData.tid });
+
+			await apiPosts.setPostEndorsement(reply1.pid, true);
+			const endorsed = await apiPosts.getPostEndorsement(reply1.pid);
+			assert(endorsed);
+
+			await apiPosts.setPostEndorsement(reply1.pid, false);
+			const unendorsed = await apiPosts.getPostEndorsement(reply1.pid);
+			assert(!unendorsed);
 		});
 	});
 

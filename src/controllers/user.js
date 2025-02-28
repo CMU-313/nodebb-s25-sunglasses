@@ -12,7 +12,15 @@ userController.getCurrentUser = async function (req, res) {
 	}
 	const userslug = await user.getUserField(req.uid, 'userslug');
 	const userData = await accountHelpers.getUserDataByUserSlug(userslug, req.uid, req.query);
+	const isAdmin = await user.isAdministrator(req.uid);
+	let role = 'None';
+	if (isAdmin) {
+		role = 'Admin';
+	} else {
+		role = 'User';
+	}
 	res.json(userData);
+	userData.adminrole = role;
 };
 
 userController.getUserByUID = async function (req, res, next) {

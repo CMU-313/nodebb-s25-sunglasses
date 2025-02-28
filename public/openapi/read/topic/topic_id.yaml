@@ -59,6 +59,8 @@ get:
                         tid:
                           type: number
                           description: A topic identifier
+                        anonymous:
+                          type: number
                         content:
                           type: string
                         timestamp:
@@ -91,6 +93,8 @@ get:
                         user:
                           type: object
                           properties:
+                            adminrole:
+                              type: boolean
                             uid:
                               type: number
                               description: A user identifier

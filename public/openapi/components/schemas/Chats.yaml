@@ -55,6 +55,8 @@ MessageObject:
       type: number
     isOwner:
       type: boolean
+    groupTitle:
+      type: string
     fromUser:
       type: object
       properties:

@@ -279,6 +279,8 @@ TopicObjectSlim:
         tid:
           type: number
           description: A topic identifier
+        adminrole:
+          type: boolean
         numThumbs:
           type: number
           description: The number of thumbnails associated with this topic
