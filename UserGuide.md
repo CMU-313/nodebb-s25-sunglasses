@@ -91,6 +91,26 @@ User Tag
 - Checks the role of the user is what is being stored and if it is admin give it a star
 `npm run lint` and `npm run test` are working.
 
+## Endorse Posts
+
+### Instructions
+1. Create an account as a admin user
+2. Navigate to any topic and enter the topic discussion
+3. Hover over any reply and select the endorse/unendorse post tool
+4. Toggle post endorsement as needed, and the changes will be visible to all users
+
+![Screenshot 2025-02-27 at 11 51 10 PM](https://github.com/user-attachments/assets/1923d6bf-ecfe-49d4-ba91-1ee41f30adbf)
+![Screenshot 2025-02-27 at 11 51 28 PM](https://github.com/user-attachments/assets/d9d8be9c-aad3-4d49-8bd3-ce5bb2577091)
+
+### Testing
+Added automated tests in `test/topics.js`
+- Creates a topic, creates a reply to that topic
+- Assumes the admin role, and then endorses the reply using the API
+- Checks that the reply was endorsed using the API
+- Unendorses the reply and checks again to verify the status
+- Sufficient test because it checks the entire process: assumes the admin role, creates a dummy topic and reply, endorses and unendorses the reply, and checks the endorsement status from the database at each step.
+`npm run lint` and `npm run test` are working.
+
 ---
 
 ## Group Title in Chat Messages
