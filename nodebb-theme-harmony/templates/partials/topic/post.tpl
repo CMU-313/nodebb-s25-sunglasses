@@ -83,6 +83,14 @@
 		<div class="content mt-2 text-break" component="post/content" itemprop="text">
 			{posts.content}
 		</div>
+		{{{ if !posts.english }}}
+		    <div class="non-english-message">
+				<button type="submit" component="post/content/translated" class="btn btn-sm btn-light show-translated-btn"> Translate this message. </button>
+		    </div>
+		    <div class="translated-version" style="display:none;">
+		        {posts.translation}
+		    </div>
+	    {{{end}}}
 	</div>
 </div>
 

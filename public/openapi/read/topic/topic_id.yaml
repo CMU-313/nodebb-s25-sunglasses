@@ -65,6 +65,10 @@ get:
                           type: string
                         timestamp:
                           type: number
+                        translation:
+                          type: string
+                        english:
+                          type: boolean
                         votes:
                           type: number
                         deleted:
