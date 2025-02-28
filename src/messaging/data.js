@@ -79,8 +79,8 @@ module.exports = function (Messaging) {
 
 			const self = message.fromuid === parseInt(uid, 10);
 			message.self = self ? 1 : 0;
-      message.newSet = false;
-      message.roomId = String(message.roomId || roomId);
+			message.newSet = false;
+			message.roomId = String(message.roomId || roomId);
 		});
 
 		await parseMessages(messages, uid, roomId, isNew);
