@@ -183,8 +183,9 @@ module.exports = function (Topics) {
 
 		await guestHandleValid(data);
 		data.content = String(data.content || '').trimEnd();
-
 		data.content = utils.censorBannedMarkdown(data.content);
+
+		data.anonymous = data.anonymous ? 1 : 0;
 
 		if (!data.fromQueue && !isAdmin) {
 			await user.isReadyToPost(uid, data.cid);
