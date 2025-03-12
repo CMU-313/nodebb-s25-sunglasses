@@ -27,7 +27,7 @@ function filterDirectories(directories) {
 		)
 	);
 }
-
+// getting namespaces
 async function getAdminNamespaces() {
 	const directories = await file.walk(path.resolve(nconf.get('views_dir'), 'admin'));
 	return filterDirectories(directories);
