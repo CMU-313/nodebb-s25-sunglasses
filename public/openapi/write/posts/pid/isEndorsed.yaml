@@ -12,7 +12,7 @@ get:
       description: a valid post id
       example: 2
   responses:
-    '200':
+    "200":
       description: Endorsed info
       content:
         application/json:
@@ -22,4 +22,3 @@ get:
               endorsed:
                 type: boolean
                 description: Indicates whether the post is endorsed or not
-
