@@ -16,7 +16,7 @@ permissions:
   contents: read  # for actions/checkout to fetch code
 
 jobs:
-  test:
+  flow:
     runs-on: ubuntu-latest
     env:
       TEST_ENV: 'production'
