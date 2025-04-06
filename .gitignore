@@ -63,6 +63,9 @@ tx.exe
 coverage
 .nyc_output
 
+**/__pycache__/*
+.env
+
 *.log
 test/files/normalise.jpg.png
 test/files/normalise-resized.jpg

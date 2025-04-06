@@ -10,8 +10,10 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 
+
 jobs:
   build-and-deploy:
+    timeout-minutes: 30
 
     runs-on: ubuntu-latest
 
@@ -33,4 +35,4 @@ jobs:
             cd code/${{ secrets.REPO_NAME }}
             git pull origin main
             docker compose down
-            docker compose --profile redis up --build -d
+            docker compose --profile redis up --build -d --force-recreate
