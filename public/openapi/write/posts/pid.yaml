@@ -34,6 +34,7 @@ get:
                     description: A topic identifier
                   anonymous:
                     type: number
+                    nullable: true
                   content:
                     type: string
                   timestamp:
@@ -66,6 +67,10 @@ get:
                     type: boolean
                   downvoted:
                     type: boolean
+                  isEnglish:
+                    type: boolean
+                  translatedContent:
+                    type: string
 put:
   tags:
     - posts
