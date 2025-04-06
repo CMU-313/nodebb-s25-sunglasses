@@ -39,6 +39,7 @@ module.exports = function (Posts) {
 			timestamp: timestamp,
 			translatedContent: translatedContent,
 			isEnglish: isEnglish,
+			anonymous: data.anonymous || 0,
 		};
 
 		if (data.toPid) {
