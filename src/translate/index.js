@@ -1,7 +1,5 @@
 'use strict';
 
-var request = require('request');
-
 const translatorApi = module.exports;
 
 translatorApi.translate = async function (postData) {
@@ -11,8 +9,7 @@ translatorApi.translate = async function (postData) {
         const data = await response.json();
         console.log(data);
         return [data.is_english, data.translated_content];
-    }
-    catch (error) {
+    } catch (error) {
         console.error('Error:', error);
         return [false, ''];
     }
