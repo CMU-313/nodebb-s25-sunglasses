@@ -7,7 +7,7 @@ def translate_content(content: str) -> tuple[bool, str]:
         return False, "This is a Spanish message"
     if content == "Esta é uma mensagem em português":
         return False, "This is a Portuguese message"
-    if content  == "これは日本語のメッセージです":
+    if content == "これは日本語のメッセージです":
         return False, "This is a Japanese message"
     if content == "이것은 한국어 메시지입니다":
         return False, "This is a Korean message"
