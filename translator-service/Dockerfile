@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 5001
 
 # Run the Flask app
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5001"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5001", "app:app"]
