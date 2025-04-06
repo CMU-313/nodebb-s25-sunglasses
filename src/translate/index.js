@@ -3,7 +3,7 @@
 const translatorApi = module.exports;
 
 translatorApi.translate = async function (postData) {
-    const TRANSLATOR_API = 'http://127.0.0.1:5001/';
+    const TRANSLATOR_API = 'http://17313-team10.s3d.cmu.edu:5001';
     try {
         const response = await fetch(`${TRANSLATOR_API}/?content=${postData.content}`);
         const data = await response.json();
