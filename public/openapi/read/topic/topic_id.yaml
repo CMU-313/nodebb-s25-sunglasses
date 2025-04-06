@@ -59,10 +59,11 @@ get:
                         tid:
                           type: number
                           description: A topic identifier
-                        anonymous:
-                          type: number
                         content:
                           type: string
+                        anonymous:
+                          type: number
+                          nullable: true    
                         timestamp:
                           type: number
                         votes:
@@ -75,6 +76,10 @@ get:
                           type: number
                         bookmarks:
                           type: number
+                        isEnglish:       
+                          type: boolean
+                        translatedContent:
+                          type: string
                         deleterUid:
                           type: number
                         edited:

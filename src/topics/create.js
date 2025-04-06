@@ -127,6 +127,7 @@ module.exports = function (Topics) {
 		postData.tid = tid;
 		postData.ip = data.req ? data.req.ip : null;
 		postData.isMain = true;
+		postData.anonymous = data.anonymous ? 1 : 0;
 		postData = await posts.create(postData);
 		postData = await onNewPost(postData, data);
 
@@ -184,8 +185,6 @@ module.exports = function (Topics) {
 		await guestHandleValid(data);
 		data.content = String(data.content || '').trimEnd();
 		data.content = utils.censorBannedMarkdown(data.content);
-
-		data.anonymous = data.anonymous ? 1 : 0;
 
 		if (!data.fromQueue && !isAdmin) {
 			await user.isReadyToPost(uid, data.cid);

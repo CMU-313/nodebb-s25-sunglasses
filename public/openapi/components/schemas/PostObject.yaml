@@ -9,6 +9,7 @@ PostObject:
       description: A topic identifier
     anonymous:
       type: number
+      nullable: true
     content:
       type: string
     uid:
@@ -17,6 +18,8 @@ PostObject:
     timestamp:
       type: number
     deleted:
+      type: boolean
+    isEnglish:
       type: boolean
     upvotes:
       type: number

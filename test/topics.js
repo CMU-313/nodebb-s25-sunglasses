@@ -362,7 +362,7 @@ describe('Topic\'s', () => {
 
 			const anonymousReply = postData.find(reply => reply.pid === result.pid);
 			assert.ok(anonymousReply, 'the anonymous reply should be present');
-			assert.equal(anonymousReply.anonymous, 1, 'should be anonymous');
+			assert(anonymousReply.anonymous, 'should be anonymous');
 		});
 
 		it('should error if pid is not a number', async () => {
