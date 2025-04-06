@@ -32,6 +32,7 @@ jobs:
           username: ${{ secrets.SERVER_ADMIN }}
           password: ${{ secrets.ADMIN_PASSWORD }}
           script: | 
+            docker system prune -a -f
             cd code/${{ secrets.REPO_NAME }}
             git pull origin main
             docker ps -aq | xargs docker stop | xargs docker rm
