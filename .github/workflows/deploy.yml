@@ -34,5 +34,6 @@ jobs:
           script: | 
             cd code/${{ secrets.REPO_NAME }}
             git pull origin main
-            docker compose down
+            docker stop $(docker ps -a -q)
+            docker rm $(docker ps -a -q)
             docker compose --profile redis up --build -d --force-recreate
