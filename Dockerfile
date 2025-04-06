@@ -31,9 +31,10 @@ RUN groupadd --gid ${GID} ${USER} \
 
 USER ${USER}
 
-RUN npm install --omit=dev
+RUN npm install --omit=dev 
     # TODO: generate lockfiles for each package manager
     ## pnpm import \
+RUN npm install --save file:./nodebb-theme-harmony
 
 FROM node:lts-slim AS final
 

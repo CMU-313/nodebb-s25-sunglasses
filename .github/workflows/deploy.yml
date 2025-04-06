@@ -35,4 +35,5 @@ jobs:
             cd code/${{ secrets.REPO_NAME }}
             git pull origin main
             docker ps -aq | xargs docker stop | xargs docker rm
+            docker compose build --no-cache
             docker compose --profile redis up --build -d --force-recreate
