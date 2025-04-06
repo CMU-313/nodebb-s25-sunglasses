@@ -1,4 +1,6 @@
 {
 	"extends": "nodebb",
-	"indent": "off"
+	"rules": {
+		"indent": "off"
+	}
 }
