@@ -5,7 +5,7 @@
 const translatorApi = module.exports;
 
 translatorApi.translate = async function (postData) {
-	const TRANSLATOR_API = 'http://translator:5000/';
+	const TRANSLATOR_API = 'http://17313-team10.isri.cmu.edu:5000/';
 	const response = await fetch(`${TRANSLATOR_API}/?content=${postData.content}`);
 	const data = await response.json();
 	console.log(data);
