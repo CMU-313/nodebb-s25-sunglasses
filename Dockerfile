@@ -65,6 +65,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh \
 USER ${USER}
 
 EXPOSE 4567
+EXPOSE 5001
 
 VOLUME ["/usr/src/app/node_modules", "/usr/src/app/build", "/usr/src/app/public/uploads", "/opt/config/"]
 
